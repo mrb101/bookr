@@ -1,0 +1,103 @@
+from __future__ import unicode_literals
+
+from django.db import models
+
+from django.contrib.auth.models import User
+
+from django.core.urlresolvers import reverse
+from django.utils.text import slugify
+
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
+'''
+- Implement Rating
+- Implement Tagging
+- implement Books in Category Count()
+'''
+
+class Category(models.Model):
+    slug = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    parent = models.ForeignKey('self', null=True)
+
+    def __unicode__(self):
+        return str(self.title)
+
+    def __str__(self):
+        return str(self.title)
+
+    @property
+    def get_absolute_url(self):
+        kwargs = {'slug': self.slug}
+        return reverse("category_detail", kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Category, self).save(*args, **kwargs)
+
+class Author(models.Model):
+    slug = models.CharField(max_length=255, null=False, blank=False)
+    name = models.CharField(max_length=255, null=False, blank=False)
+    dob = models.DateTimeField()
+    country = models.CharField(max_length=150, null=True, blank=True)
+
+
+    def __unicode__(self):
+        return str(self.name)
+
+    def __str__(self):
+        return str(self.name)
+
+    @property
+    def get_absolute_url(self):
+        kwargs = {'slug': self.slug}
+        return reverse("author_detail", kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+        super(Author, self).save(*args, **kwargs)
+
+class Book(models.Model):
+    slug = models.CharField(max_length=255, null=False, blank=False)
+    isbn-13 = models.CharField(max_length=10, null=True, blank=True)
+    isbn-10 = models.CharField(max_length=10, null=True, blank=True)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    edition = models.PositiveSmallIntegerField(null=True, blank=True)
+    cover = models.ImageField(upload_to='images', blank=True)
+    cover_thumbnail = ImageSpecField(source='image',
+                                    processors=[ResizeToFill(300, 300)],
+                                    options={'quality': 60})
+    description = models.CharField(max_length=255, null=True, blank=True)
+    author = models.ManyToManyField(Author,
+                                    related_name='books',
+                                    null=True,
+                                    on_delete=models.SET_NULL
+                                   )
+    category = models.ManyToManyField(Category,
+                                      related_names='books',
+                                      null=False,
+                                      on_delete=models.CASCADE
+                                     )
+    user = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return str(self.title)
+
+
+    def __str__(self):
+        return str(self.title)
+
+    @property
+    def get_absolute_url(self):
+        kwargs = {'slug': self.slug}
+        return reverse("book_detail", kwarg=kwargs)
+
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+        super(Book, self).save(*args, **kwargs)
