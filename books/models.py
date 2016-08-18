@@ -16,7 +16,12 @@ from imagekit.processors import ResizeToFill
 - implement Books in Category Count()
 '''
 
-class Category(models.Model):
+class TimeStampModel(models.Model):
+    created = models.DateTimeField(auto_now=True, auto_now_add=False)
+    updated = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+
+class Category(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
     description = models.CharField(max_length=255, null=True, blank=True)
@@ -38,7 +43,8 @@ class Category(models.Model):
             self.slug = slugify(self.title)
         super(Category, self).save(*args, **kwargs)
 
-class Author(models.Model):
+
+class Author(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     name = models.CharField(max_length=255, null=False, blank=False)
     dob = models.DateTimeField()
@@ -61,7 +67,7 @@ class Author(models.Model):
             self.slug = slugify(self.name)
         super(Author, self).save(*args, **kwargs)
 
-class Book(models.Model):
+class Book(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     isbn-13 = models.CharField(max_length=10, null=True, blank=True)
     isbn-10 = models.CharField(max_length=10, null=True, blank=True)
