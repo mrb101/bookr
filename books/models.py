@@ -69,8 +69,8 @@ class Author(TimeStampModel):
 
 class Book(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
-    isbn-13 = models.CharField(max_length=10, null=True, blank=True)
-    isbn-10 = models.CharField(max_length=10, null=True, blank=True)
+    isbn13 = models.CharField(max_length=10, null=True, blank=True)
+    isbn10 = models.CharField(max_length=10, null=True, blank=True)
     title = models.CharField(max_length=255, null=False, blank=False)
     edition = models.PositiveSmallIntegerField(null=True, blank=True)
     cover = models.ImageField(upload_to='images', blank=True)
