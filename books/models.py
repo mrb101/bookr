@@ -81,7 +81,6 @@ class Book(TimeStampModel):
     author = models.ManyToManyField(Author,
                                     related_name='books',
                                     null=True,
-                                    on_delete=models.SET_NULL
                                    )
     category = models.ManyToManyField(Category,
                                       related_names='books',
