@@ -78,14 +78,8 @@ class Book(TimeStampModel):
                                     processors=[ResizeToFill(300, 300)],
                                     options={'quality': 60})
     description = models.CharField(max_length=255, null=True, blank=True)
-    author = models.ManyToManyField(Author,
-                                    related_name='books',
-                                    null=True,
-                                   )
-    category = models.ManyToManyField(Category,
-                                      related_names='books',
-                                      null=False,
-                                     )
+    author = models.ManyToManyField(Author, null=True)
+    category = models.ManyToManyField(Category, null=False)
     user = models.ForeignKey(User)
 
     def __unicode__(self):
