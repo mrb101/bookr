@@ -86,7 +86,6 @@ class Book(TimeStampModel):
     category = models.ManyToManyField(Category,
                                       related_names='books',
                                       null=False,
-                                      on_delete=models.CASCADE
                                      )
     user = models.ForeignKey(User)
 
