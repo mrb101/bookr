@@ -54,7 +54,7 @@ ROOT_URLCONF = 'bookr.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(PROJECT_DIR, 'templates')],
+        'DIRS': [ os.path.join(PROJECT_ROOT, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,5 +122,5 @@ STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
 STATIC_URL = '/static/'
 MEDIA_URL = 'media'
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media_cdn')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media_cdn')
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_cdn')
