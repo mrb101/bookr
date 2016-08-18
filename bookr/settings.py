@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third party apps
-    'debug-toolbar',
+    'debug_toolbar',
     # my apps
     'books',
     'discussions'
