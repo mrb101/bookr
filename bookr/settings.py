@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party apps
     'django_toolbar',
+    # my apps
+    'books',
+    'discussions'
 ]
 
 MIDDLEWARE = [
