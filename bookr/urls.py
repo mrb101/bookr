@@ -26,10 +26,10 @@ urlpatterns = [
     url(r'^login/', auth_views.login, name="login"),
     url(r'^logout/', auth_views.logout, name="logout"),
 
-    url(r'^category/$', categories_views.CategoryList.as_view(), name="categories_list"),
-    url(r'^category/add/$', categories_views.CategoryAdd.as_view(), name="categorie_add"),
-    url(r'^category/update/$',categories_views.CategoryUpdate.as_view(), name="categorie_update"),
-    url(r'^cateogry/(?P<slug>[-\w]+)/$', categories_views.CategoryDetail.as_view(), name="categorie_detail"),
+    url(r'^category/$', books_views.CategoryList.as_view(), name="categories_list"),
+    url(r'^category/add/$', books_views.CategoryAdd.as_view(), name="categorie_add"),
+    url(r'^category/update/$',books_views.CategoryUpdate.as_view(), name="categorie_update"),
+    url(r'^cateogry/(?P<slug>[-\w]+)/$', books_views.CategoryDetail.as_view(), name="categorie_detail"),
 
     url(r'^books/$', books_views.BookList.as_view(), name="books_list"),
     url(r'^books/add/$', books_views.BookAdd.as_view(), name="book_add"),
