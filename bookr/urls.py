@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 from books import views as books_views
-from discussion import views as topic_views
+from discussions import views as topic_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
