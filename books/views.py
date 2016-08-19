@@ -13,7 +13,7 @@ from .models import Category, Author, Book
 ''' Category views '''
 class CategoryList(ListView):
     model = Category
-    tempalte_name = 'categories/list.html'
+    template_name = 'categories/book_list.html'
     context_object_name = 'categories'
 
 
@@ -34,13 +34,13 @@ class CategoryUpdate(UpdateView):
 ''' Book views '''
 class BookList(ListView):
     model = Book
-    tempalte_name = 'Books/list.html'
+    template_name = 'books/list.html'
     context_object_name = 'books'
 
 
 class BookDetail(DetailView):
     model = Book
-    tempalte_name = 'Books/detail.html'
+    template_name = 'books/detail.html'
     context_object_name = 'book'
 
 
@@ -59,13 +59,13 @@ class BookReport(View):
 ''' Author Views '''
 class AuthorList(ListView):
     model = Author
-    tempalte_name = 'authors/list.html'
+    template_name = 'authors/list.html'
     context_object_name = 'authors'
 
 
 class AuthorDetail(DetailView):
     model = Author
-    tempalte_name = 'authors/detail.html'
+    template_name = 'authors/detail.html'
     context_object_name = 'author'
 
 
