@@ -19,8 +19,8 @@ class Topic(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
     Description = models.CharField(max_length=255, null=True, blank=True)
-    book = models.ForeignKey(Book, on_delete=models.SET_NULL)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL)
+    book = models.ForeignKey(Book)
+    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return str(self.title)
@@ -39,8 +39,8 @@ class Topic(TimeStampModel):
         super(Topic, self).save(*args, **kwargs)
 
 
-class Comment(TimeStampModel):
-    user = models.ForeignKey(User)
-    topic = models.ForeignKey(Topic)
-    body = models.TextField()
+#class Comment(TimeStampModel):
+#    user = models.ForeignKey(User)
+#    topic = models.ForeignKey(Topic)
+#    body = models.TextField()
 
