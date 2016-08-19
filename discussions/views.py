@@ -30,5 +30,5 @@ class TopicUpdate(UpdateView):
     pass
 
 
-class BookReport(View):
+class TopicReport(View):
     pass
