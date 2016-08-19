@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import View, TemplateView, CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,3 +30,5 @@ class TopicUpdate(UpdateView):
     pass
 
 
+class BookReport(View):
+    pass
