@@ -22,7 +22,7 @@ class TopicDetail(DetailView):
     context_object_name= 'topic'
 
 
-class TopicCrate(CreateView):
+class TopicAdd(CreateView):
     pass
 
 

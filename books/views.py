@@ -23,7 +23,7 @@ class CategoryDetail(DetailView):
     context_object_name= 'category'
 
 
-class CategoryCrate(CreateView):
+class CategoryAdd(CreateView):
     pass
 
 
@@ -44,7 +44,7 @@ class BookDetail(DetailView):
     context_object_name = 'book'
 
 
-class BookCrate(CreateView):
+class BookAdd(CreateView):
     pass
 
 
@@ -65,7 +65,7 @@ class AuthorDetail(DetailView):
     context_object_name = 'author'
 
 
-class AuthorCrate(CreateView):
+class AuthorAdd(CreateView):
     pass
 
 
