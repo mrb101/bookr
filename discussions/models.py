@@ -19,7 +19,7 @@ class Topic(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
     Description = models.CharField(max_length=255, null=True, blank=True)
-    book = models.ForeignKey(Book, related_names='topics', on_delete=models.SET_NULL)
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, on_delete=models.SET_NULL)
 
     def __unicode__(self):
