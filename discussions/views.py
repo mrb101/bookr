@@ -1,5 +1,12 @@
 from django.shortcuts import render
 
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic.list import ListView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth import views as auth_views
+
 
 class TopicList(ListView):
     model = Topic
