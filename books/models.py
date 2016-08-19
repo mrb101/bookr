@@ -21,6 +21,10 @@ class TimeStampModel(models.Model):
     updated = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 
+class Publisher(TimeStampModel):
+    pass
+
+
 class Category(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
@@ -47,7 +51,7 @@ class Category(TimeStampModel):
 class Author(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
     name = models.CharField(max_length=255, null=False, blank=False)
-    dob = models.DateTimeField()
+    dob = models.DateTimeField(null=True, blank=True)
     country = models.CharField(max_length=150, null=True, blank=True)
 
 
@@ -66,6 +70,7 @@ class Author(TimeStampModel):
         if not self.id:
             self.slug = slugify(self.name)
         super(Author, self).save(*args, **kwargs)
+
 
 class Book(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
