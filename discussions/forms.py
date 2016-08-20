@@ -10,5 +10,4 @@ class TopicForm(ModelForm):
         fields = ['title',
                   'Description',
                   'book',
-                  'user',
                  ]
