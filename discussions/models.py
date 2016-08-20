@@ -26,12 +26,12 @@ class Topic(TimeStampModel):
         return str(self.title)
 
     def __str__(self):
-        return str(self.titlea)
+        return str(self.title)
 
     @property
     def get_absolute_url(self):
-        kwargs = {self.slug}
-        return reverse("top_details", kwargs=kwargs)
+        kwargs = {'slug': self.slug}
+        return reverse("topic_detail", kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         if not self.id:
