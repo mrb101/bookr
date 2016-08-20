@@ -8,26 +8,30 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 
 from .models import Topic
+from .forms import TopicForm
 
 
 class TopicList(ListView):
     model = Topic
-    tempalte_name = 'topics/list.html'
+    template_name = 'discussions/list.html'
     context_object_name = 'topics'
 
 
 class TopicDetail(DetailView):
     model = Topic
-    template_name = 'topics/detail.html'
+    template_name = 'discussions/detail.html'
     context_object_name= 'topic'
 
 
 class TopicAdd(CreateView):
-    pass
-
+    model = Topic
+    template_name = 'discussions/form.html'
+    form_class = TopicForm
 
 class TopicUpdate(UpdateView):
-    pass
+    model = Topic
+    template_name = 'discussions/form.html'
+    form_class = TopicForm
 
 
 class TopicReport(View):
