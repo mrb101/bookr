@@ -8,12 +8,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 
 from .models import Category, Author, Book
+from .forms import CategoryForm, AuthorForm, BookForm
 
 
 ''' Category views '''
 class CategoryList(ListView):
     model = Category
-    template_name = 'categories/book_list.html'
+    template_name = 'categories/list.html'
     context_object_name = 'categories'
 
 
@@ -24,11 +25,17 @@ class CategoryDetail(DetailView):
 
 
 class CategoryAdd(CreateView):
-    pass
+    model = Category
+    template_name = 'categories/form.html'
+    form_class = CategoryForm
 
 
 class CategoryUpdate(UpdateView):
-    pass
+    model = Category
+    template_name = 'categories/form.html'
+    form_class = CategoryForm
+    context_object_name = 'form'
+    success_url = '/categories/'
 
 
 ''' Book views '''
@@ -45,11 +52,19 @@ class BookDetail(DetailView):
 
 
 class BookAdd(CreateView):
-    pass
+    model = Book
+    template_name = 'books/form.html'
+    form_class = BookForm
+    context_object_name = 'form'
+    success_url = '/books/'
 
 
 class BookUpdate(UpdateView):
-    pass
+    model = Book
+    template_name = 'books/form.html'
+    form_class = BookForm
+    context_object_name = 'form'
+    success_url = '/books/'
 
 
 class BookReport(View):
@@ -70,7 +85,9 @@ class AuthorDetail(DetailView):
 
 
 class AuthorAdd(CreateView):
-    pass
+    model = Author
+    template_name = 'authors/form.html'
+    form_class = AuthorForm
 
 
 class AuthorUpdate(UpdateView):
