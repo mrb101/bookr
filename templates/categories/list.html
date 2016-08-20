@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block body %}
+{% for category in categories %}
+<div class="row">
+    <div class="small-12 large-12 columns">
+        <h5><a href="{{ category.get_absolute_url}}">{{ category.title }}</a></h5>
+        <p>{{ category.description }}</p>
+    </div>
+    <hr>
+</div>
+{% endfor %}
+{% endblock %}

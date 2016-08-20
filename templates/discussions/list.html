@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% block body %}
+<div class="row">
+    <div class="large-12 columns">
+        <div class="radius panel">
+            <form>
+                <div class="row collapse">
+                    <div class="large-10 small-8 columns">
+                        <input type="text"/>
+                    </div>
+                    <div class="large-2 small-3 columns">
+                        <a href="#" class="postfix button expand">Search</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<hr>
+</div>
+
+<div class="row ">
+    {% for topic in topics %}
+        <div class="large-10 columns">
+          <div class="row">
+            <div class=" large-9 columns">
+              <h5><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></h5>
+              <p><a href="{{topic.get_absolute_url}}"> Info</a> | <a href="#">Share</a></p>
+            </div>
+            <div class="row">
+              <div class=" large-12 columns">
+                <ul class="large-block-grid-2">
+                  <li>
+                    <ul>
+                      <li><strong>Posted By: </strong>{{ topic.user }}</li>
+                      <li><strong>Posted:</strong> {{ topic.created }}</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <ul>
+                      <li><strong>Wow cats:</strong> so wow</li>
+                      <li><strong>Lorem cats:</strong> ipsum kitty</li>
+                      <li><strong>Series:</strong> all the cats</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

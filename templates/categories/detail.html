@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block body %}
+<div class="row">
+    <div class="large-12 columns">
+        <div class="radius panel">
+            <form>
+                <div class="row collapse">
+                    <div class="large-10 small-8 columns">
+                        <input type="text"/>
+                    </div>
+                    <div class="large-2 small-3 columns">
+                        <a href="#" class="postfix button expand">Search</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <div class="panel">
+            <h1>{{ category.title }}</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+<div class="row">
+    {% for book in books %}
+    <div class="large-3 small-6 columns">
+        <img src="http://placehold.it/1000x1000&amp;text=Thumbnail">
+        <div class="panel">
+            <h5><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h5>
+            <h6 class="subheader">$000.00</h6>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
