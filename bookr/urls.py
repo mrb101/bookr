@@ -21,6 +21,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from main import views as main_views
 from books import views as books_views
 from discussions import views as topics_views
 
@@ -28,6 +29,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', auth_views.login, name="login"),
     url(r'^logout/', auth_views.logout, name="logout"),
+
+    url(r'^$', main_views.Home.as_view(), name='home'),
+    url(r'^about/$', main_views.About.as_view(), name='about'),
+    url(r'^contact$', main_views.Contact.as_view(), name='contact'),
 
     url(r'^categories/$', books_views.CategoryList.as_view(), name="categories_list"),
     url(r'^categories/add/$', books_views.CategoryAdd.as_view(), name="category_add"),
