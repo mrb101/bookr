@@ -18,7 +18,7 @@
             <ul class="title-area">
                 <li class="name">
                     <h1>
-                        <a href="#">
+                        <a href="/">
                             Booker
                         </a>
                     </h1>
@@ -29,10 +29,10 @@
                 <ul class="left">
                     <li class="divider"></li>
                     <li class="has-dropdown">
-                        <a class="active" href="#">Categories</a>
+                        <a class="active" href="/categories">Categories</a>
                         <ul class="dropdown">
                             <li><label>Sience</label></li>
-                            <li><a href="#" class="">Computer</a></li>
+                            <li><a href="" class="">Computer</a></li>
                             <li><a href="#">Medical</a></li>
                             <li><a href="#">Astronomy</a></li>
                             <li class="divider"></li>
@@ -47,16 +47,16 @@
                     <li class="divider"></li>
                     <li><a href="#">Research Papers / Academia</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="/about">About Us</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
                     <li class="divider"></li>
                 </ul>
                 <ul class="right">
                     <li class="divider"></li>
                     {% if user.is_authenticated %}
                     <li class="divider"></li>
-                    <li><a href="#">Upload</a></li>
+                    <li><a href="/books/add">Upload</a></li>
                     {% endif %}
                     <li class="divider"></li>
                     <li class="has-dropdown">
