@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import SmartResize
 
 '''
 - Implement Rating
@@ -26,10 +26,10 @@ class Publisher(TimeStampModel):
 
 
 class Category(TimeStampModel):
-    slug = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.CharField(max_length=255, null=False, blank=True)
     title = models.CharField(max_length=255, null=False, blank=False)
     description = models.CharField(max_length=255, null=True, blank=True)
-    parent = models.ForeignKey('self', null=True)
+    parent = models.ForeignKey('self', null=True, blank=True)
 
     def __unicode__(self):
         return str(self.title)
@@ -49,9 +49,9 @@ class Category(TimeStampModel):
 
 
 class Author(TimeStampModel):
-    slug = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.CharField(max_length=255, null=False, blank=True)
     name = models.CharField(max_length=255, null=False, blank=False)
-    dob = models.DateTimeField(null=True, blank=True)
+    dob = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     country = models.CharField(max_length=150, null=True, blank=True)
 
 
@@ -73,18 +73,18 @@ class Author(TimeStampModel):
 
 
 class Book(TimeStampModel):
-    slug = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.CharField(max_length=255, null=False, blank=True)
     isbn13 = models.CharField(max_length=10, null=True, blank=True)
     isbn10 = models.CharField(max_length=10, null=True, blank=True)
     title = models.CharField(max_length=255, null=False, blank=False)
     edition = models.PositiveSmallIntegerField(null=True, blank=True)
     cover = models.ImageField(upload_to='images', blank=True)
-    cover_thumbnail = ImageSpecField(source='image',
-                                    processors=[ResizeToFill(300, 300)],
+    cover_thumbnail = ImageSpecField(source='cover',
+                                    processors=[SmartResize(200, 200)],
                                     options={'quality': 60})
     description = models.CharField(max_length=255, null=True, blank=True)
     author = models.ManyToManyField(Author, null=True)
-    category = models.ManyToManyField(Category, null=False)
+    category = models.ManyToManyField(Category, null=True, blank=True)
     user = models.ForeignKey(User)
 
     def __unicode__(self):
@@ -97,10 +97,10 @@ class Book(TimeStampModel):
     @property
     def get_absolute_url(self):
         kwargs = {'slug': self.slug}
-        return reverse("book_detail", kwarg=kwargs)
+        return reverse("book_detail", kwargs=kwargs)
 
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.title)
         super(Book, self).save(*args, **kwargs)
