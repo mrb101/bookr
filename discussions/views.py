@@ -27,6 +27,17 @@ class TopicAdd(CreateView):
     model = Topic
     template_name = 'discussions/form.html'
     form_class = TopicForm
+    success_url = '/topics/'
+
+    def form_valid(self, form):
+        """
+        if the form is valid, save the associated model.
+        """
+        topic = form.save(commit=False)
+        topic.user = self.request.user
+        topic.save()
+        return super(TopicAdd, self).form_valid(form)
+
 
 class TopicUpdate(UpdateView):
     model = Topic
