@@ -58,6 +58,15 @@ class BookAdd(CreateView):
     context_object_name = 'form'
     success_url = '/books/'
 
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model.
+        """
+        book = form.save(commit=False)
+        book.user = self.request.user
+        book.save()
+        return super(BookAdd, self).form_valid(form)
+
 
 class BookUpdate(UpdateView):
     model = Book
@@ -91,5 +100,9 @@ class AuthorAdd(CreateView):
 
 
 class AuthorUpdate(UpdateView):
-    pass
+    model = Author
+    template_name = 'authors/form.html'
+    form_class = AuthorForm
+    context_object_name = 'form'
+    success_url = '/authors/'
 
