@@ -15,7 +15,6 @@ class BookForm(ModelForm):
                   'description',
                   'author',
                   'category',
-                  'user'
                  ]
         widgets = {
             'cover': FileInput(attrs={'class': 'button'}),
