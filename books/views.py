@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from django.views.generic import View, TemplateView, CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
@@ -24,13 +23,13 @@ class CategoryDetail(DetailView):
     context_object_name= 'category'
 
 
-class CategoryAdd(CreateView):
+class CategoryAdd(LoginRequiredMixin, CreateView):
     model = Category
     template_name = 'categories/form.html'
     form_class = CategoryForm
 
 
-class CategoryUpdate(UpdateView):
+class CategoryUpdate(LoginRequiredMixin, UpdateView):
     model = Category
     template_name = 'categories/form.html'
     form_class = CategoryForm
@@ -51,7 +50,7 @@ class BookDetail(DetailView):
     context_object_name = 'book'
 
 
-class BookAdd(CreateView):
+class BookAdd(LoginRequiredMixin, CreateView):
     model = Book
     template_name = 'books/form.html'
     form_class = BookForm
@@ -68,7 +67,7 @@ class BookAdd(CreateView):
         return super(BookAdd, self).form_valid(form)
 
 
-class BookUpdate(UpdateView):
+class BookUpdate(LoginRequiredMixin, UpdateView):
     model = Book
     template_name = 'books/form.html'
     form_class = BookForm
@@ -93,16 +92,15 @@ class AuthorDetail(DetailView):
     context_object_name = 'author'
 
 
-class AuthorAdd(CreateView):
+class AuthorAdd(LoginRequiredMixin, CreateView):
     model = Author
     template_name = 'authors/form.html'
     form_class = AuthorForm
 
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(LoginRequiredMixin, UpdateView):
     model = Author
     template_name = 'authors/form.html'
     form_class = AuthorForm
     context_object_name = 'form'
     success_url = '/authors/'
-
