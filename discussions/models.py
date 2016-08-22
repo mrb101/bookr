@@ -14,6 +14,9 @@ class TimeStampModel(models.Model):
     created = models.DateTimeField(auto_now=True, auto_now_add=False)
     updated = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+    class Meta:
+        abstract = True
+
 
 class Topic(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
@@ -39,8 +42,14 @@ class Topic(TimeStampModel):
         super(Topic, self).save(*args, **kwargs)
 
 
-#class Comment(TimeStampModel):
-#    user = models.ForeignKey(User)
-#    topic = models.ForeignKey(Topic)
-#    body = models.TextField()
+class Comment(TimeStampModel):
+    user = models.ForeignKey(User)
+    topic = models.ForeignKey(Topic)
+    body = models.TextField()
+
+    def __unicode__(self):
+        return str(self.body)
+
+    def __str__(self):
+        return str(self.body)
 
