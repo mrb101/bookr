@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.core.urlresolvers import reverse
 
@@ -47,10 +47,11 @@ class TopicComment(SingleObjectMixin, FormView):
     model = Topic
     template_name = 'discussions/detail.html'
     form_class = CommentForm
+    redirect_field_name = 'next'
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return HttpResponseForbidden()
+            return redirect('/login/?next=%s' % request.path)
         self.object = self.get_object()
         return super(TopicComment, self).post(request, *args, **kwargs)
 

@@ -30,6 +30,8 @@
                     <li class="divider"></li>
                     <li><a href="/categories">Categroies</a></li>
                     <li class="divider"></li>
+                    <li><a href="/topics">Discussion</a></li>
+                    <li class="divider"></li>
                     <li><a href="#">Research Papers / Academia</a></li>
                     <li class="divider"></li>
                     <li><a href="/about">About Us</a></li>
@@ -47,6 +49,7 @@
                     <li class="has-dropdown">
                         {% if user.is_authenticated %}
                         <a href="#">{{ user.username }}</a>
+                        <a href="#">{{user.name}}</a>
                         <ul class="dropdown">
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
