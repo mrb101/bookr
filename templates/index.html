@@ -28,22 +28,7 @@
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="divider"></li>
-                    <li class="has-dropdown">
-                        <a class="active" href="/categories">Categories</a>
-                        <ul class="dropdown">
-                            <li><label>Sience</label></li>
-                            <li><a href="" class="">Computer</a></li>
-                            <li><a href="#">Medical</a></li>
-                            <li><a href="#">Astronomy</a></li>
-                            <li class="divider"></li>
-                            <li><label>Liteture</label></li>
-                            <li><a href="#">Fiction</a></li>
-                            <li><a href="#">Short Story</a></li>
-                            <li><a href="#">Drama</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">See all &rarr;</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/categories">Categroies</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Research Papers / Academia</a></li>
                     <li class="divider"></li>
@@ -66,12 +51,12 @@
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                         {% else %}
                         <a href="#">User</a>
                         <ul class="dropdown">
-                            <li><a href="#">Login</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
                             <li><a href="#">Regsiter</a></li>
                         </ul>
                         {% endif %}
