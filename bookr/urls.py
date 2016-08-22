@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 from django.conf.urls import url, include
 from django.contrib import admin
 
@@ -49,7 +50,9 @@ urlpatterns = [
     url(r'^topics/add/$', topics_views.TopicAdd.as_view(), name="topic_add"),
     url(r'^topics/(?P<slug>[-\w]+)/update/$',topics_views.TopicUpdate.as_view(), name="topic_update"),
     url(r'^topics/(?P<slug>[-\w]+)/report/$', topics_views.TopicReport.as_view(), name="topic_report"),
-    url(r'^topics/(?P<slug>[-\w]+)/$', topics_views.TopicDetail.as_view(), name="topic_detail"),
+    url(r'^topics/(?P<slug>[-\w]+)/$', topics_views.TopicView.as_view(), name="topic_detail"),
 ]
+
+# Some extra setup for debug mode
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
