@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 
 from django.views.generic import View, TemplateView, CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
@@ -28,14 +29,18 @@ class CategoryAdd(LoginRequiredMixin, CreateView):
     template_name = 'categories/form.html'
     form_class = CategoryForm
 
+    def get_success_url(self):
+        return reverse('category_detail', kwargs={'slug': self.object.slug})
+
 
 class CategoryUpdate(LoginRequiredMixin, UpdateView):
     model = Category
     template_name = 'categories/form.html'
     form_class = CategoryForm
     context_object_name = 'form'
-    success_url = '/categories/'
 
+    def get_success_url(self):
+        return reverse('category_detail', kwargs={'slug': self.object.slug})
 
 ''' Book views '''
 class BookList(ListView):
@@ -55,7 +60,9 @@ class BookAdd(LoginRequiredMixin, CreateView):
     template_name = 'books/form.html'
     form_class = BookForm
     context_object_name = 'form'
-    success_url = '/books/'
+
+    def get_success_url(self):
+        return reverse('book_detail', kwargs={'slug': self.object.slug})
 
     def form_valid(self, form):
         """
@@ -72,7 +79,9 @@ class BookUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'books/form.html'
     form_class = BookForm
     context_object_name = 'form'
-    success_url = '/books/'
+
+    def get_success_url(self):
+        return reverse('book_detail', kwargs={'slug': self.object.slug})
 
 
 class BookReport(View):
