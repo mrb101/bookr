@@ -4,7 +4,7 @@
     <div class="row">
         <div class="large-12 columns">
             <div class="panel">
-                <h1>Feed Template</h1>
+                <h1>{{ topic.title }}</h1>
             </div>
         </div>
     </div>
@@ -13,19 +13,25 @@
             <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/>
             </div>
             <div class="large-10 columns">
-                <p><strong>By:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+                <p>{{topic.Description}}</p>
                 <ul class="inline-list">
                     <li><a href="">Reply</a></li>
                     <li><a href="">Share</a></li>
                 </ul>
+                <hr>
+                <form method='POST' action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="button" type="submit" value="submit" />
+                </form>
+                <hr>
                 <h6>2 Comments</h6>
                 <div class="row">
+                    {% for comment in topic.comment_set.all %}
                     <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-                    <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-                </div>
-                <div class="row">
-                    <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-                    <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
+                    <div class="large-10 columns"><p style="color: blue;">{{ comment.user }}</p><p>{{ comment }}</p></div>
+                    <hr>
+                    {% endfor %}
                 </div>
             </div>
         </div>
