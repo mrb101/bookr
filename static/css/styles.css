@@ -1,0 +1,17 @@
+#commentButton {
+    color: #008CBA;
+    cursor: pointer;
+}
+
+label[for="id_body"] {
+    display: none;
+}
+
+#commentForm {
+    display: none;
+}
+
+#commentLineBreak {
+    display: none;
+}
+
