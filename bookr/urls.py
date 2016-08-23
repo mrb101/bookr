@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^categories/$', books_views.CategoryList.as_view(), name="categories_list"),
     url(r'^categories/add/$', books_views.CategoryAdd.as_view(), name="category_add"),
     url(r'^categories/(?P<slug>[-\w]+)/update/$',books_views.CategoryUpdate.as_view(), name="category_update"),
-    url(r'^cateogries/(?P<slug>[-\w]+)/$', books_views.CategoryDetail.as_view(), name="category_detail"),
+    url(r'^categories/(?P<slug>[-\w]+)/$', books_views.CategoryDetail.as_view(), name="category_detail"),
 
     url(r'^books/$', books_views.BookList.as_view(), name="books_list"),
     url(r'^books/add/$', books_views.BookAdd.as_view(), name="book_add"),
