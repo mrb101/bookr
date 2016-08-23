@@ -91,6 +91,7 @@ class Book(TimeStampModel):
     cover_thumbnail = ImageSpecField(source='cover',
                                     processors=[SmartResize(200, 200)],
                                     options={'quality': 60})
+    item = models.FileField(upload_to='book_file_path')
     description = models.CharField(max_length=255, null=True, blank=True)
     author = models.ManyToManyField(Author, null=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
