@@ -29,7 +29,7 @@ from discussions import views as topics_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', auth_views.login, name="login"),
-    url(r'^logout/', auth_views.logout, name="logout"),
+    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name="logout"),
 
     url(r'^$', main_views.Home.as_view(), name='home'),
     url(r'^about/$', main_views.About.as_view(), name='about'),
