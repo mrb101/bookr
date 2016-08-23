@@ -31,7 +31,7 @@ class Publisher(TimeStampModel):
 
 class Category(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=True)
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     parent = models.ForeignKey('self', null=True, blank=True)
 
@@ -54,7 +54,7 @@ class Category(TimeStampModel):
 
 class Author(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=True)
-    name = models.CharField(max_length=255, null=False, blank=False)
+    name = models.CharField(max_length=255, null=False, blank=False, unique=True)
     dob = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     country = models.CharField(max_length=150, null=True, blank=True)
 
@@ -76,13 +76,18 @@ class Author(TimeStampModel):
         super(Author, self).save(*args, **kwargs)
 
 
+def book_cover_path(instance, filename):
+    ''' Each user will have a folder to store his books '''
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class Book(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=True)
     isbn13 = models.CharField(max_length=10, null=True, blank=True)
     isbn10 = models.CharField(max_length=10, null=True, blank=True)
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False, unique=True)
     edition = models.PositiveSmallIntegerField(null=True, blank=True)
-    cover = models.ImageField(upload_to='images', blank=True)
+    cover = models.ImageField(upload_to=book_cover_path, blank=True)
     cover_thumbnail = ImageSpecField(source='cover',
                                     processors=[SmartResize(200, 200)],
                                     options={'quality': 60})

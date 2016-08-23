@@ -20,7 +20,7 @@ class TimeStampModel(models.Model):
 
 class Topic(TimeStampModel):
     slug = models.CharField(max_length=255, null=False, blank=False)
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False, unique=True)
     Description = models.CharField(max_length=255, null=True, blank=True)
     book = models.ForeignKey(Book)
     user = models.ForeignKey(User)
