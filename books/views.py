@@ -23,6 +23,13 @@ class CategoryDetail(DetailView):
     template_name = 'categories/detail.html'
     context_object_name= 'category'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(CategoryDetail, self).get_context_data(*args, **kwargs)
+        category_pk = self.object.pk
+        categories = Category.objects.filter(pk=category_pk).prefetch_related('book_set')
+        context['categories'] = categories
+        return context
+
 
 class CategoryAdd(LoginRequiredMixin, CreateView):
     model = Category
