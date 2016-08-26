@@ -11,6 +11,9 @@
             <h5>Header</h5>
             <h6 class="subheader">Praesent placerat dui tincidunt elit suscipit sed.</h6>
             <a href="#" class="small button">Add to Cart</a>
+            {% for tag in tags %}
+            {{tag}}
+            {% endfor %}
         </div>
     </div>
 </div>
