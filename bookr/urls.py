@@ -25,11 +25,12 @@ from django.conf.urls.static import static
 from main import views as main_views
 from books import views as books_views
 from discussions import views as topics_views
+from tags import views as tags_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', auth_views.login, name="login"),
-    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name="logout"),
+    url(r'^logout/', auth_views.logout, name="logout"),
 
     url(r'^$', main_views.Home.as_view(), name='home'),
     url(r'^about/$', main_views.About.as_view(), name='about'),
@@ -51,8 +52,14 @@ urlpatterns = [
     url(r'^topics/(?P<slug>[-\w]+)/update/$',topics_views.TopicUpdate.as_view(), name="topic_update"),
     url(r'^topics/(?P<slug>[-\w]+)/report/$', topics_views.TopicReport.as_view(), name="topic_report"),
     url(r'^topics/(?P<slug>[-\w]+)/$', topics_views.TopicView.as_view(), name="topic_detail"),
+
+    url(r'^tags/(?P<slug>[-\w]+)/$', tags_views.TagDetail.as_view(), name="tag_detail"),
 ]
 
 # Some extra setup for debug mode
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

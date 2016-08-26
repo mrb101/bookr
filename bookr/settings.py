@@ -27,9 +27,15 @@ SECRET_KEY = '7svex0^3e&2nl8nsv*)ye(xv7(@c125vz-=zd9l$9kks4l63#5'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = ['127.0.0.1']
 
+# Login URLs
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
+
+# Disable Automatic Django-debug-toolbar setup
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Application definition
 
@@ -41,12 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third party apps
+    'debug_toolbar',
     # my apps
     'books',
-    'discussions'
+    'discussions',
+    'tags',
 ]
 
+
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
