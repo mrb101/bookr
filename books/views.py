@@ -7,9 +7,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth import views as auth_views
 
+from django.contrib.contenttypes.models import ContentType
+
 from .models import Category, Author, Book
 from .forms import CategoryForm, AuthorForm, BookForm
 
+from tags.models import Tag
 
 ''' Category views '''
 class CategoryList(ListView):
@@ -22,13 +25,6 @@ class CategoryDetail(DetailView):
     model = Category
     template_name = 'categories/detail.html'
     context_object_name= 'category'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CategoryDetail, self).get_context_data(*args, **kwargs)
-        category_pk = self.object.pk
-        categories = Category.objects.filter(pk=category_pk).prefetch_related('book_set')
-        context['categories'] = categories
-        return context
 
 
 class CategoryAdd(LoginRequiredMixin, CreateView):
@@ -60,6 +56,13 @@ class BookDetail(DetailView):
     model = Book
     template_name = 'books/detail.html'
     context_object_name = 'book'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(BookDetail, self).get_context_data(*args, **kwargs)
+        model = ContentType.objects.get_for_model(Book)
+        tags = Tag.objects.filter(content_type=model, object_id=self.object.id)
+        context['tags'] = tags
+        return context
 
 
 class BookAdd(LoginRequiredMixin, CreateView):
