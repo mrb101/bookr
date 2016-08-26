@@ -24,9 +24,6 @@
     </div>
 </div>
 <div class="row">
-<div class="row">
-
-{% for category in categories %}
     {% for book in category.book_set.all %}
     <div class="large-2 columns">
        <a href="#"> <span> </span><img src="{% if book.cover %}{{book.cover_thumbnail.url}}{% else %}http://placehold.it/500x500&amp;text=Thumbnail{% endif %}" alt="book cover" class=" thumbnail"></a>
@@ -39,7 +36,7 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button expand medium"><span>Download </span> </a>
-              <a href="#"  class="button expand medium"><span>Report</span></a> 
+              <a href="#"  class="button expand medium"><span>Report</span></a>
             </div>
             <div class="row">
               <div class=" large-12 columns">
@@ -68,6 +65,5 @@
         </div>
         <hr>
     {% endfor %}
-{% endfor %}
 </div>
 {% endblock %}
