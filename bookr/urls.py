@@ -51,7 +51,9 @@ urlpatterns = [
     url(r'^topics/add/$', topics_views.TopicAdd.as_view(), name="topic_add"),
     url(r'^topics/(?P<slug>[-\w]+)/update/$',topics_views.TopicUpdate.as_view(), name="topic_update"),
     url(r'^topics/(?P<slug>[-\w]+)/report/$', topics_views.TopicReport.as_view(), name="topic_report"),
-    url(r'^topics/(?P<slug>[-\w]+)/$', topics_views.TopicView.as_view(), name="topic_detail"),
+    url(r'^topics/(?P<slug>[-\w]+)/$', topics_views.TopicDetail.as_view(), name="topic_detail"),
+    url(r'^topics/(?P<slug>[-\w]+)/add/$', topics_views.add_comment, name="add_comment"),
+
 
     url(r'^tags/(?P<slug>[-\w]+)/$', tags_views.TagDetail.as_view(), name="tag_detail"),
 ]
@@ -59,7 +61,3 @@ urlpatterns = [
 # Some extra setup for debug mode
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]

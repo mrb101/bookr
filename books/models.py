@@ -65,11 +65,6 @@ class Author(TimeStampModel):
     def __str__(self):
         return str(self.name)
 
-    @property
-    def get_absolute_url(self):
-        kwargs = {'slug': self.slug}
-        return reverse("author_detail", kwargs=kwargs)
-
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
@@ -93,8 +88,8 @@ class Book(TimeStampModel):
                                     options={'quality': 60})
     item = models.FileField(upload_to='book_file_path')
     description = models.CharField(max_length=255, null=True, blank=True)
-    author = models.ManyToManyField(Author, null=True)
-    category = models.ManyToManyField(Category, null=True, blank=True)
+    author = models.ManyToManyField(Author)
+    category = models.ManyToManyField(Category)
     user = models.ForeignKey(User)
 
     def __unicode__(self):

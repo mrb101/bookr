@@ -45,6 +45,7 @@ class CategoryUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('category_detail', kwargs={'slug': self.object.slug})
 
+
 ''' Book views '''
 class BookList(ListView):
     model = Book

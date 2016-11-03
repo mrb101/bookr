@@ -30,6 +30,8 @@
                     <li class="divider"></li>
                     <li><a href="/categories">Categroies</a></li>
                     <li class="divider"></li>
+                    <li><a href="/books">Books</a></li>
+                    <li class="divider"></li>
                     <li><a href="/topics">Discussion</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Research Papers / Academia</a></li>
@@ -40,10 +42,19 @@
                     <li class="divider"></li>
                 </ul>
                 <ul class="right">
-                    <li class="divider"></li>
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="large-8 small-9 columns">
+                                <input type="text" placeholder="Search for a Book">
+                            </div>
+                            <div class="large-4 small-3 columns">
+                                <a href="#" class="primary button expand">Search</a>
+                            </div>
+                        </div>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="divider"></li>
-                    <li><a href="/books/add">Upload</a></li>
+                    <li class="upload-button"><a href="/books/add">Upload</a></li>
                     {% endif %}
                     <li class="divider"></li>
                     <li class="has-dropdown">

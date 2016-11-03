@@ -1,22 +1,41 @@
 {% extends 'index.html' %}
+{% load static %}
 {% block body %}
 <div class="row">
-    <p><img src="http://placehold.it/1000x400&text=[banner img]"/></p>
+    <p><img src="{% static 'img/hero.jpg' %}" /></p>
 </div>
+{% if user.is_authenticated %}
 <div class="row">
     <div class="large-12 columns">
         <div class="panel">
-            <h4>Get in touch!</h4>
+            <h4>Share</h4>
             <div class="row">
                 <div class="large-9 columns">
-                    <p>We'd love to hear from you, you attractive person you.</p>
+                    <p>Upload a book and help us create the biggest online library</p>
                 </div>
                 <div class="large-3 columns">
-                    <a href="#" class="radius button right">Contact Us</a>
+                    <a href="/books/add" class="radius button right">Upload</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% else %}
+<div class="row">
+    <div class="large-12 columns">
+        <div class="panel">
+            <h4>Register</h4>
+            <div class="row">
+                <div class="large-9 columns">
+                    <p>Join us and lets share knowledge</p>
+                </div>
+                <div class="large-3 columns">
+                    <a href="#" class="radius button right">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
 

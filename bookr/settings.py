@@ -34,9 +34,6 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
-# Disable Automatic Django-debug-toolbar setup
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third party apps
-    'debug_toolbar',
     # my apps
     'books',
     'discussions',
@@ -56,7 +52,6 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

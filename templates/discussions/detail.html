@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block body %}
 <div class="row">
-    <div class="row">
+    <div id="topic-{{topic.id}}" class="row">
         <div class="large-12 columns">
             <div class="panel">
                 <h1>{{ topic.title }}</h1>
@@ -21,16 +21,25 @@
                 <hr id="commentLineBreak">
                 <form method='POST' action="" id="commentForm">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input class="button" type="submit" value="submit" />
+                    <input type="hidden" name="topicid" value="{{topic.id}}" />
+                    <input type="hidden" name="topicslug" value="{{topic.slug}}" />
+                    {{ form.body }}
+                    <input id="addComment" class="button" type="submit" value="submit" />
                 </form>
                 <hr>
-                <h6>2 Comments</h6>
-                <div class="row">
+                <h6>{{ topic.comment_set.count }} Comments</h6>
+                <div id="commentsList" class="row">
                     {% for comment in topic.comment_set.all %}
-                    <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-                    <div class="large-10 columns"><p style="color: blue;">{{ comment.user }}</p><p>{{ comment }}</p></div>
-                    <hr>
+                    <div class="comment">
+                        <div class="large-2 columns small-3">
+                            <img src="http://placehold.it/50x50&text=[img]"/>
+                        </div>
+                        <div class="large-10 columns">
+                            <p style="color: blue;">{{ comment.user }}</p>
+                            <p>{{ comment }}</p>
+                        </div>
+                        <hr>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

@@ -31,26 +31,23 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button expand medium"><span>Download </span> </a>
-              <a href="#"  class="button expand medium"><span>Report</span></a> 
+              <a href="#"  class="button expand medium"><span>Report</span></a>
             </div>
             <div class="row">
               <div class=" large-12 columns">
                 <ul class="large-block-grid-2">
                   <li>
                     <ul>
-                      <li><strong>Author: </strong>{{ book.author }}</li>
+                      <li><strong>Author: </strong>{% for author in book.author.all %}{{ author.name }}, {% endfor %}</li>
                       <li><strong>Edition:</strong> {{ book.edition }}</li>
                       <li><strong>publish:</strong> to be implemented</li>
-                      <li><strong>rating:</strong> {{ book.rating }}</li>
-                      <li><strong>isbn-10: </strong> {{ book.isbn10 }}</li>
-                      <li><strong>isbn-13: </strong> {{ book.isbn13 }}</li>
                     </ul>
                   </li>
                   <li>
                     <ul>
-                      <li><strong>Wow cats:</strong> so wow</li>
-                      <li><strong>Lorem cats:</strong> ipsum kitty</li>
-                      <li><strong>Series:</strong> all the cats</li>
+                      <li><strong>rating:</strong> {{ book.rating }}</li>
+                      <li><strong>isbn-10: </strong> {{ book.isbn10 }}</li>
+                      <li><strong>isbn-13: </strong> {{ book.isbn13 }}</li>
                     </ul>
                   </li>
                 </ul>

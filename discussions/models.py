@@ -47,6 +47,9 @@ class Comment(TimeStampModel):
     topic = models.ForeignKey(Topic)
     body = models.TextField()
 
+    class Meta:
+        ordering = ['-created']
+
     def __unicode__(self):
         return str(self.body)
 

@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+import json
+from django.core import serializers
 
 from django.core.urlresolvers import reverse
 
@@ -38,6 +41,29 @@ class TopicDetail(FormMixin, DetailView):
         return context
 
 
+def add_comment(request, slug):
+    if request.method == 'POST':
+        user_name = request.user.username
+        #user = serializers.serialize('json', )
+        topic = Topic.objects.get(slug=slug)
+        user = request.user
+        comment = Comment()
+        comment.user = request.user
+        comment.topic = topic
+        comment.body = request.POST.get('comment')
+        comment.save()
+        return HttpResponse(json.dumps({
+            'type': 'S01',
+            'msg': 'Comment has been added',
+            'comment': request.POST.get('comment'),
+            'user': user_name
+        }))
+    return HttpResponse(json.drumps({
+        'type': 'E01',
+        'msg': 'Faild'
+    }))
+
+
 class TopicComment(SingleObjectMixin, FormView):
     """
     post: check if the user is authenticated and holds the current object
@@ -64,21 +90,6 @@ class TopicComment(SingleObjectMixin, FormView):
         comment.topic = self.get_object()
         comment.save()
         return super(TopicComment, self).form_valid(form)
-
-
-class TopicView(View):
-    """
-    dispatch the request to either
-    - Topic Detail
-    - Topic Comment
-    """
-    def get(self, request, *args, **kwargs):
-        view = TopicDetail.as_view()
-        return view(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        view = TopicComment.as_view()
-        return view(request, *args, **kwargs)
 
 
 class TopicAdd(LoginRequiredMixin, CreateView):
